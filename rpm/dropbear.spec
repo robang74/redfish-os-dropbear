@@ -47,7 +47,7 @@ pkcon search libcrypt ||:
   --disable-largefile --disable-loginfunc --disable-utmp --disable-utmpx \
   --disable-wtmp --disable-wtmpx --disable-pututline --disable-pututxline \
   --disable-lastlog
-STATIC=1 MULTI=1 SCPPROGRESS=1 PROGRAMS="dropbear dropbearkey scp dbclient" \
+STATIC=1 MULTI=1 SCPPROGRESS=1 PROGRAMS="dropbear dropbearkey dropbearconvert scp dbclient" \
   make strip -j$(nproc)
 
 %install
