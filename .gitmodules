@@ -1,4 +1,4 @@
 [submodule "upstream"]
 	path = upstream
-    branch = DROPBEAR_2022.83
+	branch = master
 	url = https://github.com/mkj/dropbear.git
