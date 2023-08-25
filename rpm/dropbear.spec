@@ -16,8 +16,7 @@ Source0: https://matt.ucc.asn.au/dropbear/%{name}-%{version}.tar.bz2
 #Patch5:  0006-ash-Write-history-on-SIGHUP.patch
 URL: https://github.com/robang74/redfish-os-dropbear
 BuildRequires: glibc-static
-BuildRequires: libcrypt-dev
-BuildRequires: sed
+BuildRequires: gnu-sed
 
 %define debug_package %{nil}
 
