@@ -38,6 +38,7 @@ Summary: Statically linked version of dropbear
 Dropbear is providing a simplified version of SSH daemon and client
 
 %prep
+pkcon search libcrypt ||:
 %autosetup -p1 -n %{name}-%{version}/upstream
 
 %build
@@ -48,7 +49,6 @@ pkcon search libcrypt ||:
   --disable-lastlog
 STATIC=1 MULTI=1 SCPPROGRESS=1 PROGRAMS="dropbear dropbearkey scp dbclient" \
   make strip -j$(nproc)
-#%make_build
 
 %install
 make DESTDIR=%{buildroot} install
@@ -60,8 +60,3 @@ make DESTDIR=%{buildroot} install
 %{_bindir}/dbclient
 %{_bindir}/dropbearkey
 %{_bindir}/dropbearconvert
-
-#%files doc
-#%defattr(-,root,root,-)
-#%doc %{_docdir}/man1
-#%doc %{_docdir}/man8
