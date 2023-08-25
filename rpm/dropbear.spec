@@ -15,10 +15,7 @@ Source0: https://matt.ucc.asn.au/dropbear/%{name}-%{version}.tar.bz2
 #Patch4:  0005-ash-job-option-to-restore-term-io-after-job-is-stopp.patch
 #Patch5:  0006-ash-Write-history-on-SIGHUP.patch
 URL: https://github.com/robang74/redfish-os-dropbear
-BuildRequires: glibc-static libtomcrypt-static
-BuildRequires: libselinux-static libsepol-static
-BuildRequires: pcre-static
-BuildRequires: pkgconfig(systemd)
+BuildRequires: glibc-static #libtomcrypt-static
 BuildRequires: sed
 
 %define debug_package %{nil}
@@ -43,8 +40,13 @@ Dropbear is providing a simplified version of SSH daemon and client
 %autosetup -p1 -n %{name}-%{version}/upstream
 
 %build
-./configure CFLAGS=-O2 CXXFLAGS=-O2 --prefix /usr --enable-static
-%make_build
+./configure CFLAGS=-O2 CXXFLAGS=-O2 --prefix /usr --enable-static \
+  --disable-largefile --disable-loginfunc --disable-utmp --disable-utmpx \
+  --disable-wtmp --disable-wtmpx --disable-pututline --disable-pututxline \
+  --disable-lastlog
+STATIC=1 MULTI=1 SCPPROGRESS=1 PROGRAMS="dropbear dropbearkey scp dbclient" \
+  make strip -j$(nproc)
+#%make_build
 
 %install
 make DESTDIR=%{buildroot} install
