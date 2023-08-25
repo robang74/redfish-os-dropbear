@@ -43,22 +43,8 @@ Dropbear is providing a simplified version of SSH daemon and client
 %autosetup -p1 -n %{name}-%{version}/upstream
 
 %build
-# TODO: This config should be synced with the dynamic config at some point
-# currently the features differ quite a bit
-#cp %{SOURCE2} .config
-#yes "" | make oldconfig
+./configure CFLAGS=-O2 CXXFLAGS=-O2 --prefix /usr --enable-static
 %make_build
-
-# clean any leftovers from static build
-make clean
-make distclean
-
-# Build dynamic version
-#cp %{SOURCE3} .config
-
-#yes "" | make oldconfig
-%make_build
-make all
 
 %install
 make DESTDIR=%{buildroot} install
@@ -66,14 +52,12 @@ make DESTDIR=%{buildroot} install
 %files
 %defattr(-,root,root,-)
 %license LICENSE
-/bin/dropbear
-%{_bindir}/dropbear
+%{_sbindir}/dropbear
+%{_bindir}/dbclient
+%{_bindir}/dropbearkey
+%{_bindir}/dropbearconvert
 
-%files static
-%defattr(-,root,root,-)
-/bin/dropbear
-%{_bindir}/dropbear
-
-%files doc
-%defattr(-,root,root,-)
-%doc %{_docdir}/%{name}-%{version}
+#%files doc
+#%defattr(-,root,root,-)
+#%doc %{_docdir}/man1
+#%doc %{_docdir}/man8
