@@ -1,7 +1,4 @@
-name: rpmbuild on demand
-
-env:
-  SFOS_RELEASE: 4.5.0.16
+name: rpmbuild for centos8
 
 on:
   workflow_dispatch:
