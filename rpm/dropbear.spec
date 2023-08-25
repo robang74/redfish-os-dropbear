@@ -41,6 +41,7 @@ Dropbear is providing a simplified version of SSH daemon and client
 %autosetup -p1 -n %{name}-%{version}/upstream
 
 %build
+pkcon search libcrypt ||:
 ./configure CFLAGS=-O2 CXXFLAGS=-O2 --prefix /usr --enable-static \
   --disable-largefile --disable-loginfunc --disable-utmp --disable-utmpx \
   --disable-wtmp --disable-wtmpx --disable-pututline --disable-pututxline \
